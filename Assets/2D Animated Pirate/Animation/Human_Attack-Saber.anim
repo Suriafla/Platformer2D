@@ -1257,11 +1257,39 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.75
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
     path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_6_ArmFront/Pirate 01 - sheet_11_HandFront/Saber
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_1_Head/Pirate 01 - sheet_15_Face-Hurt
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -1276,12 +1304,30 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.68333334
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.75
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_1_Head/Pirate 01 - sheet_15_Face-Hurt
-    classID: 212
+    path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_6_ArmFront/Pirate 01 - sheet_11_HandFront/Saber
+    classID: 70
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -1464,6 +1510,13 @@ AnimationClip:
       attribute: 3305885265
       script: {fileID: 0}
       typeID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2239181913
+      attribute: 3305885265
+      script: {fileID: 0}
+      typeID: 70
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
@@ -3191,6 +3244,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.75
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -5435,7 +5497,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 1
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -5448,6 +5510,43 @@ AnimationClip:
     attribute: m_Enabled
     path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_1_Head/Pirate 01 - sheet_15_Face-Hurt
     classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.68333334
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.75
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: Pirate 01 - sheet_2_Body/Pirate 01 - sheet_6_ArmFront/Pirate 01 - sheet_11_HandFront/Saber
+    classID: 70
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
