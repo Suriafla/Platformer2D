@@ -7,21 +7,21 @@ public class MeleeAttack : MonoBehaviour
    
     public AudioClip audioSwingWeapon;
     public AudioClip audioShot;
-    public AudioSource audioSource;
     public Transform center;
+    public float periodAttack;
 
-    [SerializeField] private float rangeAttack = 3;
+   // [SerializeField] private float rangeAttack = 3;
     [SerializeField] private Animator anim;
     private float timer;
-    private float periodAttack = 0.5f;
     private SpriteRenderer spriteRenderer;
     private bool isAttacking;
     private HealthController heathController;
-    private TakeDamage takeDamage;
+    private TakeDamage takeDamage; 
+    private AudioSource audioSource;
 
-    // Start is called before the first frame update
     void Start()
-    {
+    { 
+        audioSource = GetComponent<AudioSource>();
         timer = 0;
         isAttacking = false;
 
@@ -35,20 +35,24 @@ public class MeleeAttack : MonoBehaviour
 
     public void Attack()
     {
+        
         if (timer < 0)
         {
+            Debug.Log("Can Attack" + anim.GetBool("Attack"));
+            isAttacking = true;
             timer = periodAttack;
-
+           
             if (anim)
             {
                 anim.SetTrigger("Attack");
                 audioSource.PlayOneShot(audioSwingWeapon);
-                StartCoroutine(AttackAnim());   
+                //StartCoroutine(AttackAnim());                  
             }
         }
     }
 
-    private IEnumerator AttackAnim()
+  /*
+   private IEnumerator AttackAnim()
     {
         yield return new WaitForSeconds(0.5f);
         
@@ -64,13 +68,9 @@ public class MeleeAttack : MonoBehaviour
                     if (enemiesInRangeAttack[i].gameObject != null)
                     {
                         audioSource.PlayOneShot(audioShot);
-                        /* spriteRenderer = enemiesInRangeAttack[i].GetComponent<SpriteRenderer>();
-                         spriteRenderer.color = new Vector4(1, 
-                             Mathf.Clamp(spriteRenderer.color.g - 0.2f, 0f, 1f),
-                             Mathf.Clamp(spriteRenderer.color.b - 0.2f, 0f, 1f),
-                             1);     */
-                        heathController = GetComponent<HealthController>();
-                             takeDamage = GetComponent<TakeDamage>();
+                       
+                        heathController = enemiesInRangeAttack[i].GetComponent<HealthController>();
+                             takeDamage = enemiesInRangeAttack[i].GetComponent<TakeDamage>();
 
                         if(heathController)
                             enemiesInRangeAttack[i].GetComponent<HealthController>().HealthChange(-1);
@@ -79,12 +79,50 @@ public class MeleeAttack : MonoBehaviour
                     }
                 }
             }
-        }
+        } 
     }
+*/
 
-    private void OnDrawGizmos()
+   /* private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(center.position, rangeAttack);
     }
+    */
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.name);
+        Debug.Log("Attacking" + isAttacking);
+
+        /*AnimatorClipInfo[] stInfos = anim.GetCurrentAnimatorClipInfo(0);
+        if (stInfos != null)
+        {
+            AnimationClip info = stInfos[0].clip;
+            float lenght = info.length;
+            Debug.Log("Длина" + lenght + info.name);
+        }
+        */
+
+
+        if ((other.gameObject.CompareTag("Enemy") && this.gameObject.CompareTag("Player")
+                   || other.gameObject.CompareTag("Player") && this.gameObject.CompareTag("Enemy")) && (timer > 0) && (isAttacking == true ))
+        {
+
+
+
+            audioSource.PlayOneShot(audioShot);
+
+            heathController = other.GetComponent<HealthController>();
+            takeDamage = other.GetComponent<TakeDamage>();
+
+            if (heathController)
+                other.GetComponent<HealthController>().HealthChange(-1);
+            if (takeDamage)
+                other.GetComponent<TakeDamage>().Hurt(transform.localScale.x);
+            isAttacking = false;
+        }
+        
+    }
+    
 } 

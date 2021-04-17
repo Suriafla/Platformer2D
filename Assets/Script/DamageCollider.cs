@@ -14,7 +14,7 @@ public class DamageCollider : MonoBehaviour
         if (takeDamage != null)
         {
             Debug.Log("stay");
-            takeDamage.Hurt();          
+            takeDamage.Hurt(1);          
         }
     }
     

@@ -6,39 +6,38 @@ using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
-		
-	public int maxHealth = 100;
-	public int currentHealth;
-	public float lives = 5;
+    
 	public float moveSpeed = 10f;
 	public float jumpPower = 13f;
 	public AudioSource audioSource;
 	public AudioClip audioStep;
 	public AudioClip audioLanding;
+    
 
 	private Animator anim;
 	private bool standingOnGround;
 	private bool alive;
 	private Rigidbody2D rb;
-	private MeleeAttack heroAttack;
+	private MeleeAttack meleeAttack;
+    private HealthController healthController;
+    private Vector2 rbPosition;
 
 	private void Start()
 	{
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
-		heroAttack = GetComponent<MeleeAttack>();
-
-
+		meleeAttack = GetComponent<MeleeAttack>();
+        healthController = GetComponent<HealthController>();
+        rbPosition = GetComponent<Rigidbody2D>().position;
 		standingOnGround = true;
-		currentHealth = maxHealth;
 		alive = true;
 	}
 
 	private void FixedUpdate()
 	{
 		CheckStandingOnGround();
-
-	}
+      
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -46,7 +45,7 @@ public class HeroController : MonoBehaviour
 		if (alive)
 		{
 
-			if (currentHealth == 0) Die();
+			if (healthController.currentHealth == 0) Die();
 
 			if (standingOnGround)
 			{
@@ -61,11 +60,11 @@ public class HeroController : MonoBehaviour
 			
 			if (Input.GetButtonDown("Fire1")) Attack();
 			if (Input.GetButtonDown("Jump")) Jump();
-			if (Input.GetAxisRaw("Horizontal") != 0.0f) Running();
-			else anim.SetBool("isRun", false);
+            if (Input.GetAxisRaw("Horizontal") != 0.0f) Running();
+            else anim.SetBool("isRun", false);
 
-			// Падение игрока приводит к перезагрузке уровня
-			if (transform.position.y < 16)
+            // Падение игрока приводит к перезагрузке уровня
+            if (transform.position.y < 5)
 			{
 
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -95,7 +94,10 @@ public class HeroController : MonoBehaviour
 			audioSource.PlayOneShot(audioStep);
 		}
 
-		transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1, 1);
+        transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), transform.localScale.y, transform.localScale.z);
+        // rbPosition.x = rbPosition.x + Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        // rb.MovePosition(rbPosition);
+        
 		transform.position = 
 			transform.position + moveSpeed * new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime;
 
@@ -112,7 +114,6 @@ public class HeroController : MonoBehaviour
 
 	private void Jump()
 	{
-		Debug.Log(standingOnGround);
 		if (standingOnGround)
 		{
 			rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
@@ -122,14 +123,14 @@ public class HeroController : MonoBehaviour
 
 	private void Attack()
 	{ 
-		heroAttack.Attack();
+		meleeAttack.Attack();
 	}
 
 	private void CheckStandingOnGround()
 	{
 		Collider2D[] colider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-		// Условие первого приземление игрока
-		if ((colider.Length > 1) && standingOnGround == false) audioSource.PlayOneShot(audioLanding);
+		// Условие первого приземление игрока       
+		// if ((colider.Length > 1) && standingOnGround == false) audioSource.PlayOneShot(audioLanding);
 		if (colider.Length > 1) standingOnGround = true;
 		else standingOnGround = false;
 	}
@@ -159,6 +160,11 @@ public class HeroController : MonoBehaviour
 		{
 			this.transform.SetParent(collision.transform);
 		}
+
+        if((collision.gameObject.CompareTag("Ground")) || (collision.gameObject.CompareTag("Platform")))
+        {
+            audioSource.PlayOneShot(audioLanding);
+        }
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)
@@ -168,6 +174,14 @@ public class HeroController : MonoBehaviour
 			this.transform.parent = null;
 		}
 	}
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 0.3f);
+    }
+
+
 }
 
 

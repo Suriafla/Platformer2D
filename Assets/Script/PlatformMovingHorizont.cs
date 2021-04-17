@@ -6,13 +6,12 @@ public class PlatformMovingHorizont : MonoBehaviour
 {
     private bool movingRight;
     private float speed = 5;
-    // Start is called before the first frame update
+
     void Start()
     {
         movingRight = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = transform.position + speed * new Vector3(-1, 0, 0) * Time.deltaTime;

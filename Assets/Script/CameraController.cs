@@ -20,8 +20,7 @@ public class CameraController : MonoBehaviour
     {
         cameraTransform = GetComponent<Transform>();
         cameraPosition.x = cameraTransform.position.x;
-        cameraPosition.y = cameraTransform.position.y;
-        DrawCameraBoundaries();  
+        cameraPosition.y = cameraTransform.position.y;     
     }
 
     // Update is called once per frame
@@ -39,15 +38,16 @@ public class CameraController : MonoBehaviour
               cameraTransform.position.z
             );
 
-        DrawCameraBoundaries();
+   
 
     }
 
-    public void DrawCameraBoundaries()
+    public void OnDrawGizmos()
     {
-        Debug.DrawLine(new Vector2(leftBoundary, bottomBoundary), new Vector2(leftBoundary, upperBoundary), Color.green);
-        Debug.DrawLine(new Vector2(leftBoundary, upperBoundary), new Vector2(rightBoundary, upperBoundary), Color.green);
-        Debug.DrawLine(new Vector2(rightBoundary, upperBoundary), new Vector2(rightBoundary, bottomBoundary), Color.green);
-        Debug.DrawLine(new Vector2(rightBoundary, bottomBoundary), new Vector2(leftBoundary, bottomBoundary), Color.green);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(new Vector3(leftBoundary, bottomBoundary, 0), new Vector3(leftBoundary, upperBoundary, 0));
+        Gizmos.DrawLine(new Vector3(leftBoundary, upperBoundary, 0), new Vector3(rightBoundary, upperBoundary, 0));
+        Gizmos.DrawLine(new Vector3(rightBoundary, upperBoundary, 0), new Vector3(rightBoundary, bottomBoundary, 0));
+        Gizmos.DrawLine(new Vector3(rightBoundary, bottomBoundary, 0), new Vector3(leftBoundary, bottomBoundary, 0));
     }
 }

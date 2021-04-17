@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
+    private AudioSource audioSource;
+
+    public AudioClip audioPause;
     public GameObject pauseMenu;
     public bool gamePaused = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         pauseMenu.SetActive(false);
     }
 
@@ -18,6 +23,7 @@ public class Pause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            audioSource.PlayOneShot(audioPause);
             if (gamePaused)
             {
                 Resume();
