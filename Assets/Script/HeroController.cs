@@ -70,19 +70,6 @@ public class HeroController : MonoBehaviour
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
 
-			
-			
-
-			//if (Input.GetAxisRaw("Horizontal") < 0)
-			//{
-			//    transform.position = transform.position + Vector3.left * moveSpeed * Time.deltaTime;
-			//}
-			//if (Input.GetAxisRaw("Horizontal") > 0)
-			//{
-			//    Vector3 directionMoving = Vector3.right * Input.GetAxis("Horizontal");
-			//    transform.position = Vector3.MoveTowards(transform.position, transform.position + directionMoving, moveSpeed * Time.deltaTime);
-			//}
-
 		}
 	}
 
@@ -95,8 +82,6 @@ public class HeroController : MonoBehaviour
 		}
 
         transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), transform.localScale.y, transform.localScale.z);
-        // rbPosition.x = rbPosition.x + Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        // rb.MovePosition(rbPosition);
         
 		transform.position = 
 			transform.position + moveSpeed * new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime;
@@ -129,29 +114,15 @@ public class HeroController : MonoBehaviour
 	private void CheckStandingOnGround()
 	{
 		Collider2D[] colider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-		// Условие первого приземление игрока       
-		// if ((colider.Length > 1) && standingOnGround == false) audioSource.PlayOneShot(audioLanding);
 		if (colider.Length > 1) standingOnGround = true;
 		else standingOnGround = false;
 	}
 
-	/*public void HealthChange(int numberLives)
-	{
-		currentHealth = Mathf.Clamp(currentHealth + numberLives, 0, maxHealth);
-		Debug.Log(currentHealth);
-	} */
-
-	/*public void Hurt()
-	{
-		anim.SetTrigger("hurt");
-		rb.AddForce(new Vector2(-4f, 2f), ForceMode2D.Impulse);
-	} */
 
 	private void Die()
 	{
 		alive = false;
 		anim.SetTrigger("die");
-		// SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)

@@ -59,12 +59,9 @@ public class EnemyController : MonoBehaviour
 
         if (diffCoordinate.magnitude < 4)
         {
-            //anim.SetBool("Running", false);
-            //anim.SetBool("Walking", false);
             RunToHero(diffCoordinate, true);
             meleeAtack.Attack();
-            availability = false;
-            
+            availability = false;          
         }
 
         else availability = true;
@@ -103,22 +100,10 @@ public class EnemyController : MonoBehaviour
             else dirRunning = -1;
 
             transform.localScale = new Vector3(dirRunning, transform.localScale.y, transform.localScale.z);
-            //transform.position = Vector2.Lerp(transform.position, heroTransform.position, Time.deltaTime);
             Movement(7, dirRunning);
             anim.SetBool("Running", true);
         }
 
     }
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("NameWeap = " + collision.tag);
-        if(collision.CompareTag("Weapon"))
-        {
-            Vector2 diffCoordinate;
-            diffCoordinate = heroTransform.position - transform.position;
-            RunToHero(diffCoordinate, true);
-        }
-    }*/
 
 }
