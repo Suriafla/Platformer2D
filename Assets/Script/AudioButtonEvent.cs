@@ -6,9 +6,14 @@ using UnityEngine.EventSystems;
 
 public class AudioButtonEvent : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
-    public AudioSource audioSource;
-    public AudioClip audioHoverButton;
-    public AudioClip audioClickButton;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip audioHoverButton;
+    [SerializeField] private AudioClip audioClickButton;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

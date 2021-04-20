@@ -7,23 +7,20 @@ public class CameraController : MonoBehaviour
     private Vector2 heroPosition;
     private Vector2 cameraPosition;
     private Transform cameraTransform;
-    public GameObject hero;
+    private GameObject hero;
+    private readonly float leftBoundary = 47;
+    private readonly float upperBoundary = 33;
+    private readonly float bottomBoundary = 20;
+    private readonly float rightBoundary = 230;
 
-    public float leftBoundary;
-    public float rightBoundary;
-    public float bottomBoundary;
-    public float upperBoundary;
-
-
-    // Start is called before the first frame update
     void Start()
     {
+        hero = GameObject.Find("Hero");
         cameraTransform = GetComponent<Transform>();
         cameraPosition.x = cameraTransform.position.x;
         cameraPosition.y = cameraTransform.position.y;     
     }
 
-    // Update is called once per frame
     void Update()
     {
         heroPosition = hero.transform.position;
@@ -37,12 +34,9 @@ public class CameraController : MonoBehaviour
                Mathf.Clamp(cameraPosition.y, bottomBoundary, upperBoundary),
               cameraTransform.position.z
             );
-
-   
-
     }
 
-    public void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(new Vector3(leftBoundary, bottomBoundary, 0), new Vector3(leftBoundary, upperBoundary, 0));

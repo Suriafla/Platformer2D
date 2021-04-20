@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public int maxHealth;
-    public int currentHealth;
+    [SerializeField] private int maxHealth;
+    public int CurrentHealth { get; private set; }
+    public int MaxHealth { get => maxHealth;}
 
     void Start()
     {
-        currentHealth = maxHealth;   
+        CurrentHealth = MaxHealth;   
     }
-
 
     void Update()
     {
-        if((currentHealth <= 0)&&(this.gameObject.CompareTag("Enemy")))
+        if((CurrentHealth <= 0)&&(this.gameObject.CompareTag("Enemy")))
         {
             Destroy(this.gameObject);
         }
@@ -23,8 +23,8 @@ public class HealthController : MonoBehaviour
 
     public void HealthChange(int numberLives)
     {
-        currentHealth = Mathf.Clamp(currentHealth + numberLives, 0, maxHealth);
-        Debug.Log(currentHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + numberLives, 0, MaxHealth);
+        Debug.Log(CurrentHealth);
         Debug.Log(this.gameObject.name);
     }
 

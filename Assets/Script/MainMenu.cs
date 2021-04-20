@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class MainMenu : MonoBehaviour
 {
-
-    public void PlayGame()
-    {
-       
+    private void PlayGame()
+    {      
         SceneManager.LoadScene("Level 1");
     }
 
-    public void ExitGame()
-    {
-        
+    private void ExitGame()
+    {        
         Application.Quit();
     }
 
-    public void ToMenu()
+    private void ToMenu()
     {
         SceneManager.LoadScene("MainMenu");
         // Оживляет время, которое останавливается при паузе

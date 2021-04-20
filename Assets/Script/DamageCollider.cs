@@ -13,8 +13,7 @@ public class DamageCollider : MonoBehaviour
         
         if (takeDamage != null)
         {
-            Debug.Log("stay");
-            takeDamage.Hurt(1);          
+            takeDamage.Hurt(0);          
         }
     }
     
@@ -23,7 +22,6 @@ public class DamageCollider : MonoBehaviour
         HealthController healthController = other.gameObject.GetComponent<HealthController>();
         if (healthController != null)
         {
-            Debug.Log("exit");
             healthController.HealthChange(-1);
         }
     }

@@ -6,21 +6,19 @@ using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
-    
-	public float moveSpeed = 10f;
-	public float jumpPower = 13f;
-	public AudioSource audioSource;
-	public AudioClip audioStep;
-	public AudioClip audioLanding;
-    
 
-	private Animator anim;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpPower;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioLanding;
+    [SerializeField] private AudioClip audioStep;
 	private bool standingOnGround;
 	private bool alive;
-	private Rigidbody2D rb;
-	private MeleeAttack meleeAttack;
     private HealthController healthController;
+	private MeleeAttack meleeAttack;
     private Vector2 rbPosition;
+	private Rigidbody2D rb;
+	private Animator anim;
 
 	private void Start()
 	{
@@ -35,8 +33,7 @@ public class HeroController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		CheckStandingOnGround();
-      
+		CheckStandingOnGround();    
     }
 
 	// Update is called once per frame
@@ -44,8 +41,7 @@ public class HeroController : MonoBehaviour
 	{
 		if (alive)
 		{
-
-			if (healthController.currentHealth == 0) Die();
+			if (healthController.CurrentHealth == 0) Die();
 
 			if (standingOnGround)
 			{
@@ -56,8 +52,7 @@ public class HeroController : MonoBehaviour
 				anim.SetBool("isRun", false);
 				anim.SetBool("isJump", true);
 			}
-
-			
+		
 			if (Input.GetButtonDown("Fire1")) Attack();
 			if (Input.GetButtonDown("Jump")) Jump();
             if (Input.GetAxisRaw("Horizontal") != 0.0f) Running();
@@ -66,10 +61,8 @@ public class HeroController : MonoBehaviour
             // Падение игрока приводит к перезагрузке уровня
             if (transform.position.y < 5)
 			{
-
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
-
 		}
 	}
 
@@ -85,7 +78,6 @@ public class HeroController : MonoBehaviour
         
 		transform.position = 
 			transform.position + moveSpeed * new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime;
-
 	}
 
 
@@ -103,7 +95,6 @@ public class HeroController : MonoBehaviour
 		{
 			rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
 		}
-
 	}
 
 	private void Attack()
@@ -151,8 +142,6 @@ public class HeroController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 0.3f);
     }
-
-
 }
 
 

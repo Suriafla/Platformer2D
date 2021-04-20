@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MovementBall : MonoBehaviour
 {
+    [SerializeField] private float speed;
     private Rigidbody2D rb;
     private Transform ballTransform;
-    [SerializeField] private float speed;
-    private bool movingRight = true;
     private CircleCollider2D ballCollider;
+    private bool movingRight = true;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +16,6 @@ public class MovementBall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ballTransform = GetComponent<Transform>();
         ballCollider = GetComponent<CircleCollider2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()

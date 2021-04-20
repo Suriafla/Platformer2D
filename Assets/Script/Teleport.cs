@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    public AudioClip audioTeleport;
-    public Transform pointTeleport;
+    [SerializeField] private AudioClip audioTeleport;
+    private Vector3 pointTeleport;
     private AudioSource audioSource;
 
     private void Start()
     {
+        pointTeleport = new Vector3(158, 29, 0);
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void teleport(Collider2D collision)
+    private void TeleportToPoint(Collider2D collision)
     {
         audioSource.PlayOneShot(audioTeleport);
-        collision.gameObject.transform.position = pointTeleport.position;
+        collision.gameObject.transform.position = pointTeleport;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,9 +25,7 @@ public class Teleport : MonoBehaviour
         Debug.Log("Name = " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Player"))
         {
-
-            teleport(collision);
+            TeleportToPoint(collision);
         }
     }
-
 }

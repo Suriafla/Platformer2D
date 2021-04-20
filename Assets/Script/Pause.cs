@@ -4,50 +4,46 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
+    [SerializeField] private AudioClip audioPause;
     private AudioSource audioSource;
+    private GameObject pauseMenu;
+    private bool isPaused = false;
 
-    public AudioClip audioPause;
-    public GameObject pauseMenu;
-    public bool gamePaused = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+        pauseMenu = transform.Find("Background").gameObject;
         pauseMenu.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             audioSource.PlayOneShot(audioPause);
-            if (gamePaused)
+            if (isPaused)
             {
                 Resume();
             }
-            else makePause();
+            else SetPause();
         }
     }
 
-    public void Resume()
+    private void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        gamePaused = false;
+        isPaused = false;
         GameObject temp = GameObject.Find("Hero");
         temp.GetComponent<HeroController>().enabled = true; 
     }
 
-    public void makePause()
+    private void SetPause()
     {       
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        gamePaused = true;
+        isPaused = true;
         GameObject temp = GameObject.Find("Hero");
         temp.GetComponent<HeroController>().enabled = false;
-
     }
 }

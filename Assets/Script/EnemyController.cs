@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator anim;
+    [SerializeField] private readonly AudioClip audioStep;
     private MeleeAttack meleeAtack;
     private int direction;
     private float timerPatrollingSide;
@@ -14,9 +15,6 @@ public class EnemyController : MonoBehaviour
     private bool availability;
     private HealthController healthController;
     private HealthBarEnemy healtBar;
-
-
-    public AudioClip audioStep;
 
     void Start()
     {
@@ -28,13 +26,13 @@ public class EnemyController : MonoBehaviour
         availability = true;
         healthController = GetComponent<HealthController>();
         healtBar = GetComponent<HealthBarEnemy>();
-        healtBar.SetMaxHealthBar(healthController.maxHealth);
+        healtBar.SetMaxHealthBar(healthController.MaxHealth);
     }
 
 
     void Update()
     {
-        healtBar.ChangeHealthBar(healthController.currentHealth);
+        healtBar.ChangeHealthBar(healthController.CurrentHealth);
         timerPatrollingSide -= Time.deltaTime;
         Patrolling();
     }

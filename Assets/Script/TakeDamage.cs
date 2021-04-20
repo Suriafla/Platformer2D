@@ -7,20 +7,11 @@ public class TakeDamage : MonoBehaviour
     [SerializeField] private Animator anim;
     private Rigidbody2D rb;
     private Transform characterTransform;
-
-    
+ 
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         characterTransform = GetComponent<Transform>();
-
-    }
-
-
-    void Update()
-    {
-        
     }
 
     public void Hurt(float direction)

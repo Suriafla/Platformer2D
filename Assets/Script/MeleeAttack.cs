@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
 {
-   
-    public AudioClip audioSwingWeapon;
-    public AudioClip audioShot;
-    public Transform center;
-    public float periodAttack;
-
+    [SerializeField] private float periodAttack;
+    [SerializeField] private AudioClip audioSwingWeapon;
+    [SerializeField] private AudioClip audioShot;
     [SerializeField] private Animator anim;
     private float timer;
     private SpriteRenderer spriteRenderer;
@@ -26,7 +23,6 @@ public class MeleeAttack : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer -= Time.deltaTime;
@@ -52,15 +48,9 @@ public class MeleeAttack : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
-        Debug.Log("Attacking" + isAttacking);
-
         if ((other.gameObject.CompareTag("Enemy") && this.gameObject.CompareTag("Player")
                    || other.gameObject.CompareTag("Player") && this.gameObject.CompareTag("Enemy")) && (timer > 0) && (isAttacking == true ))
         {
-
-
-
             audioSource.PlayOneShot(audioShot);
 
             heathController = other.GetComponent<HealthController>();
@@ -71,8 +61,6 @@ public class MeleeAttack : MonoBehaviour
             if (takeDamage)
                 other.GetComponent<TakeDamage>().Hurt(transform.localScale.x);
             isAttacking = false;
-        }
-        
-    }
-    
+        }        
+    }    
 } 
