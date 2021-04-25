@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
@@ -22,7 +20,6 @@ public class Teleport : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Name = " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Player"))
         {
             TeleportToPoint(collision);

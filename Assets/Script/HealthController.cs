@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
@@ -10,22 +8,25 @@ public class HealthController : MonoBehaviour
 
     void Start()
     {
-        CurrentHealth = MaxHealth;   
+        CurrentHealth = MaxHealth;
     }
 
     void Update()
     {
-        if((CurrentHealth <= 0)&&(this.gameObject.CompareTag("Enemy")))
-        {
-            Destroy(this.gameObject);
-        }
+        DieEnemy();
     }
 
     public void HealthChange(int numberLives)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + numberLives, 0, MaxHealth);
-        Debug.Log(CurrentHealth);
-        Debug.Log(this.gameObject.name);
+    }
+
+    private void DieEnemy()
+    {
+        if(CurrentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }

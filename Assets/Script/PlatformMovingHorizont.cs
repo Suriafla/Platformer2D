@@ -1,37 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlatformMovingHorizont : MonoBehaviour
 {
-    private bool movingRight;
-    private float speed = 5;
-
-    void Start()
-    {
-        movingRight = true;
-    }
+    private int dirMoving = 1;
+    private readonly float moveSpeed = 5;
 
     void Update()
     {
-        transform.position = transform.position + speed * new Vector3(-1, 0, 0) * Time.deltaTime;
+        Move(moveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Player")
         {
-            if (movingRight)
-            {
-                movingRight = false;
-                speed = (-1) * speed;
-            }
-
-            else
-            {
-                movingRight = true;
-                speed = (-1) * speed;
-            }
+            dirMoving = (-1) * dirMoving;
         }
+    }
+
+    private void Move(float moveSpeed)
+    {
+        transform.position = transform.position + dirMoving * moveSpeed * new Vector3(-1, 0, 0) * Time.deltaTime;
     }
 }

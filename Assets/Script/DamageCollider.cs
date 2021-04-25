@@ -1,23 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
    
 
-    void OnCollisionStay2D(Collision2D other)
+   /* void OnCollisionStay2D(Collision2D other)
     {
 
-        TakeDamage takeDamage = other.gameObject.GetComponent<TakeDamage>();
+        AnimateTakingDamage takeDamage = other.gameObject.GetComponent<AnimateTakingDamage>();
         
         if (takeDamage != null)
         {
             takeDamage.Hurt(0);          
         }
     }
+    */
     
-    void OnCollisionExit2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         HealthController healthController = other.gameObject.GetComponent<HealthController>();
         if (healthController != null)

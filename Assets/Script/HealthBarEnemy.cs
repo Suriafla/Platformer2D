@@ -1,12 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
 public class HealthBarEnemy : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    private HealthController healthController;
+
+    private void Start()
+    {
+        healthController = GetComponent<HealthController>();
+        SetMaxHealthBar(healthController.MaxHealth);
+    }
+
+    private void Update()
+    {
+        ChangeHealthBar(healthController.CurrentHealth);
+    }
 
     public void SetMaxHealthBar(int maxHealth)
     {
@@ -18,4 +28,5 @@ public class HealthBarEnemy : MonoBehaviour
     {
         slider.value = currentHealth;
     }
+
 }

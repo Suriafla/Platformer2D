@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -23,6 +21,20 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        FollowHero();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(new Vector3(leftBoundary, bottomBoundary, 0), new Vector3(leftBoundary, upperBoundary, 0));
+        Gizmos.DrawLine(new Vector3(leftBoundary, upperBoundary, 0), new Vector3(rightBoundary, upperBoundary, 0));
+        Gizmos.DrawLine(new Vector3(rightBoundary, upperBoundary, 0), new Vector3(rightBoundary, bottomBoundary, 0));
+        Gizmos.DrawLine(new Vector3(rightBoundary, bottomBoundary, 0), new Vector3(leftBoundary, bottomBoundary, 0));
+    }
+
+    private void FollowHero()
+    {
         heroPosition = hero.transform.position;
         heroPosition.x = hero.transform.position.x;
         heroPosition.y = hero.transform.position.y;
@@ -34,14 +46,5 @@ public class CameraController : MonoBehaviour
                Mathf.Clamp(cameraPosition.y, bottomBoundary, upperBoundary),
               cameraTransform.position.z
             );
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(new Vector3(leftBoundary, bottomBoundary, 0), new Vector3(leftBoundary, upperBoundary, 0));
-        Gizmos.DrawLine(new Vector3(leftBoundary, upperBoundary, 0), new Vector3(rightBoundary, upperBoundary, 0));
-        Gizmos.DrawLine(new Vector3(rightBoundary, upperBoundary, 0), new Vector3(rightBoundary, bottomBoundary, 0));
-        Gizmos.DrawLine(new Vector3(rightBoundary, bottomBoundary, 0), new Vector3(leftBoundary, bottomBoundary, 0));
     }
 }

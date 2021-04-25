@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
@@ -13,10 +10,9 @@ public class HeroController : MonoBehaviour
     [SerializeField] private AudioClip audioLanding;
     [SerializeField] private AudioClip audioStep;
 	private bool standingOnGround;
-	private bool alive;
+	public bool alive;
     private HealthController healthController;
 	private MeleeAttack meleeAttack;
-    private Vector2 rbPosition;
 	private Rigidbody2D rb;
 	private Animator anim;
 
@@ -26,7 +22,6 @@ public class HeroController : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		meleeAttack = GetComponent<MeleeAttack>();
         healthController = GetComponent<HealthController>();
-        rbPosition = GetComponent<Rigidbody2D>().position;
 		standingOnGround = true;
 		alive = true;
 	}
@@ -53,7 +48,7 @@ public class HeroController : MonoBehaviour
 				anim.SetBool("isJump", true);
 			}
 		
-			if (Input.GetButtonDown("Fire1")) Attack();
+			if (Input.GetButtonDown("Fire1")) meleeAttack.Attack();
 			if (Input.GetButtonDown("Jump")) Jump();
             if (Input.GetAxisRaw("Horizontal") != 0.0f) Running();
             else anim.SetBool("isRun", false);
@@ -80,26 +75,12 @@ public class HeroController : MonoBehaviour
 			transform.position + moveSpeed * new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime;
 	}
 
-
-
-	private void ResetAnimation()
-	{
-		anim.SetBool("isLookUp", false);
-		anim.SetBool("isRun", false);
-		anim.SetBool("isJump", false);
-	}
-
 	private void Jump()
 	{
 		if (standingOnGround)
 		{
 			rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
 		}
-	}
-
-	private void Attack()
-	{ 
-		meleeAttack.Attack();
 	}
 
 	private void CheckStandingOnGround()

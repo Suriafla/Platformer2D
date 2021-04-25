@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HeartsUI : MonoBehaviour
@@ -14,16 +12,21 @@ public class HeartsUI : MonoBehaviour
     }
 
     void Update()
-    {      
-             for (int i = 0; i < hero.CurrentHealth; i++)
-             {
-                // Включаем спрайт заполненного сердца
-                hearts[i].fillAmount = 1;        
-             }
-            
-             for(int j = hero.CurrentHealth; j < hero.MaxHealth; j++)
-            {
-                hearts[j].fillAmount = 0;
-            }             
+    {
+        HeartsFillControl(hero.MaxHealth);
+    }
+
+    private void HeartsFillControl(int maxHearts)
+    {
+        for (int i = 0; i < hero.CurrentHealth; i++)
+        {
+            // Включаем спрайт заполненного сердца
+            hearts[i].fillAmount = 1;
+        }
+
+        for (int j = hero.CurrentHealth; j < maxHearts; j++)
+        {
+            hearts[j].fillAmount = 0;
+        }
     }
 }

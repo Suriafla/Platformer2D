@@ -1,46 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
     [SerializeField] private AudioClip audioPause;
     private AudioSource audioSource;
-    private GameObject pauseMenu;
+    public static GameObject PauseMenu { get; set; }
     private bool isPaused = false;
+    private GlobalKey globalKey;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        pauseMenu = transform.Find("Background").gameObject;
-        pauseMenu.SetActive(false);
+        PauseMenu = transform.Find("Panel").gameObject;
+        PauseMenu.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GlobalKey.EscKeyEnable == true)
         {
-            audioSource.PlayOneShot(audioPause);
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
+                audioSource.PlayOneShot(audioPause);
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else SetPause();
             }
-            else SetPause();
         }
     }
 
     private void Resume()
     {
-        pauseMenu.SetActive(false);
+        PauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         GameObject temp = GameObject.Find("Hero");
-        temp.GetComponent<HeroController>().enabled = true; 
+        temp.GetComponent<HeroController>().enabled = true;
     }
 
     private void SetPause()
-    {       
-        pauseMenu.SetActive(true);
+    {
+        PauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
         GameObject temp = GameObject.Find("Hero");

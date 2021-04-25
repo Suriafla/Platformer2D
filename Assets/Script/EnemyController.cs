@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-    [SerializeField] private readonly AudioClip audioStep;
+    [SerializeField] private AudioClip audioStep;
     private MeleeAttack meleeAtack;
     private int direction;
     private float timerPatrollingSide;
@@ -13,8 +11,9 @@ public class EnemyController : MonoBehaviour
     private AudioSource audioSource;
     private Transform heroTransform;
     private bool availability;
-    private HealthController healthController;
-    private HealthBarEnemy healtBar;
+//    private HealthController healthController;
+//    private HealthBarEnemy healtBar;
+    private readonly float moveSpeed = 2;
 
     void Start()
     {
@@ -24,15 +23,11 @@ public class EnemyController : MonoBehaviour
         meleeAtack = GetComponent<MeleeAttack>();
         audioSource = GetComponent<AudioSource>();
         availability = true;
-        healthController = GetComponent<HealthController>();
-        healtBar = GetComponent<HealthBarEnemy>();
-        healtBar.SetMaxHealthBar(healthController.MaxHealth);
     }
 
 
     void Update()
     {
-        healtBar.ChangeHealthBar(healthController.CurrentHealth);
         timerPatrollingSide -= Time.deltaTime;
         Patrolling();
     }
@@ -82,7 +77,7 @@ public class EnemyController : MonoBehaviour
                 transform.localScale = new Vector3(direction, transform.localScale.y, transform.localScale.z);
 
             }
-            Movement(2, direction);
+            Movement(moveSpeed, direction);
         }
     }
 
@@ -98,7 +93,7 @@ public class EnemyController : MonoBehaviour
             else dirRunning = -1;
 
             transform.localScale = new Vector3(dirRunning, transform.localScale.y, transform.localScale.z);
-            Movement(7, dirRunning);
+            Movement(moveSpeed + 5, dirRunning);
             anim.SetBool("Running", true);
         }
 
