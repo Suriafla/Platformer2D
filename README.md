@@ -1,24 +1,40 @@
-					#Ellie's Adventures
+# Ellie's Adventures
 
-##About game
-
+## About game
 Ellie's Adventures is a free, open-source, 2D plaftormer game.
 
-##Open project in Unity on Windows
+## Open project in Unity 
 1. Install the [Unity Hub](https://unity3d.com/get-unity/download).
-2. If you work on Windows, then open cmd and input:
-'''
-git config core.autocrlf true
-'''
+2. Set up correct download from Git. Open console.
+    * If you work on Windows input:
+        ```
+        git config core.autocrlf true
+        ```
+    * if you work on Linux or MacOS input:  
+        ```
+        $ git config core.autocrlf input
+        ```
+        or
+        ```
+        git config core.autocrlf false
+        ```
+    
 3. Fork, clone remote repository to your local machine.
-4. Add folder with project in Unity Hub 
+4. Add folder with project in Unity Hub.
 5. Open project.
+6. Install assets needed for the project:
+    1. Follow to https://assetstore.unity.com/;
+    2. Install list of assets from RequiredAssets.txt.
+7. Done!
 
-##License 
+## Build project
+1. Open project in Unity. 
+2. File -> Build Settings. Choose your settings.
+3. Enter "Build".
 
-The Ellie's Adventures game is open-sourced software licensed under the ??
+## License 
+The Ellie's Adventures game is open-sourced software licensed under the **Apache License 2.0**. 
  
-##Contacts
-
+## Contacts
 Elton Aslanov [peepquik@gmail.com](mailto:peepquik@gmail.com).
 
