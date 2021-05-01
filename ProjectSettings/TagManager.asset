@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Weapon
   - Ground
+  - HorizontalPlatform
   layers:
   - Default
   - TransparentFX

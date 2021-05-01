@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Class for starting the animation of taking damage
+/// </summary>
 public class AnimateTakingDamage : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator animator;
     private Rigidbody2D rb;
     private HealthController healthController;
     private int tempForHealth;
@@ -16,16 +19,28 @@ public class AnimateTakingDamage : MonoBehaviour
 
     private void Update()
     {
-        if (healthController.CurrentHealth < tempForHealth)
-        {
-            Hurt(0);
-            tempForHealth = healthController.CurrentHealth;
-        }
+        CheckTakingDamage();
     }
 
-    public void Hurt(float direction)
+    /// <summary>
+    /// Implementing the animation of receiving damage
+    /// </summary>
+    /// <param name="direction">direction of impulse force</param>
+    public void TakeDamage(float direction)
     {
         if(rb) rb.AddForce(new Vector2(4f*direction, 2f), ForceMode2D.Impulse);
-        if (anim) anim.SetTrigger("Hurt");
+        if (animator) animator.SetTrigger("Hurt");
+    }
+
+    /// <summary>
+    /// Check taking damage
+    /// </summary>
+    private void CheckTakingDamage()
+    {
+        if (healthController.CurrentHealth < tempForHealth)
+        {
+            TakeDamage(0);
+            tempForHealth = healthController.CurrentHealth;
+        }
     }
 }

@@ -16,11 +16,18 @@ public class HealthController : MonoBehaviour
         DieEnemy();
     }
 
+    /// <summary>
+    /// Method to change the current number of lives within certain limits
+    /// </summary>
+    /// <param name="numberLives"></param>
     public void HealthChange(int numberLives)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + numberLives, 0, MaxHealth);
     }
 
+    /// <summary>
+    /// Method 
+    /// </summary>
     private void DieEnemy()
     {
         if(CurrentHealth <= 0)
@@ -28,5 +35,4 @@ public class HealthController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
 }

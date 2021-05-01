@@ -1,21 +1,14 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Class for objects that deal damage when colliding with it
+/// </summary>
 public class DamageCollider : MonoBehaviour
 {
-   
-
-   /* void OnCollisionStay2D(Collision2D other)
-    {
-
-        AnimateTakingDamage takeDamage = other.gameObject.GetComponent<AnimateTakingDamage>();
-        
-        if (takeDamage != null)
-        {
-            takeDamage.Hurt(0);          
-        }
-    }
-    */
-    
+    /// <summary>
+    /// The method takes away one unit of health upon collision with an object
+    /// </summary>
+    /// <param name="other">Takes one life unit away from other.gameObject</param>
     void OnCollisionEnter2D(Collision2D other)
     {
         HealthController healthController = other.gameObject.GetComponent<HealthController>();
@@ -24,5 +17,4 @@ public class DamageCollider : MonoBehaviour
             healthController.HealthChange(-1);
         }
     }
-
 }

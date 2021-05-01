@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Class to play the end of game
+/// </summary>
 public class EndGame : MonoBehaviour
 {
     private GameObject hero;
@@ -20,6 +23,9 @@ public class EndGame : MonoBehaviour
         LoseEnd();
     }
 
+    /// <summary>
+    /// General method for all endings
+    /// </summary>
     private void End(Collider2D collision)
     {
         GlobalKey.EscKeyEnable = false;
@@ -28,6 +34,9 @@ public class EndGame : MonoBehaviour
         hero.GetComponent<HeroController>().enabled = false;
     }
 
+    /// <summary>
+    /// Losing ending method
+    /// </summary>
     private void LoseEnd()
     {
         if(hero.GetComponent<HealthController>().CurrentHealth <= 0)
@@ -37,6 +46,9 @@ public class EndGame : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Winning ending method, Method will work only if hero comes to the chest
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

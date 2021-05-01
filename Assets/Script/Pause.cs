@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Class to work with pauses
+/// </summary>
 public class Pause : MonoBehaviour
 {
     [SerializeField] private AudioClip audioPause;
     private AudioSource audioSource;
     public static GameObject PauseMenu { get; set; }
     private bool isPaused = false;
-    private GlobalKey globalKey;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        // Panel it's background pause menu with all buttons
         PauseMenu = transform.Find("Panel").gameObject;
         PauseMenu.SetActive(false);
     }
@@ -31,6 +34,9 @@ public class Pause : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Class to resume the game
+    /// </summary>
     private void Resume()
     {
         PauseMenu.SetActive(false);
@@ -40,6 +46,9 @@ public class Pause : MonoBehaviour
         temp.GetComponent<HeroController>().enabled = true;
     }
 
+    /// <summary>
+    /// Class to set pause the game
+    /// </summary>
     private void SetPause()
     {
         PauseMenu.SetActive(true);

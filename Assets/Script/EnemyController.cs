@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// General class to control enemies
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator anim;
@@ -11,9 +14,8 @@ public class EnemyController : MonoBehaviour
     private AudioSource audioSource;
     private Transform heroTransform;
     private bool availability;
-//    private HealthController healthController;
-//    private HealthBarEnemy healtBar;
-    private readonly float moveSpeed = 2;
+    private readonly float walkSpeed = 2;
+    private readonly float runSpeed = 7;
 
     void Start()
     {
@@ -25,13 +27,33 @@ public class EnemyController : MonoBehaviour
         availability = true;
     }
 
-
     void Update()
     {
+        Vector2 CoordinateDifference;
+        CoordinateDifference = heroTransform.position - transform.position;
         timerPatrollingSide -= Time.deltaTime;
-        Patrolling();
+
+        // If the hero is less than 10 units from the enemy and the enemy
+        // "sees" the hero. Enemy run to hero
+        if (CoordinateDifference.magnitude < 10)
+        {
+            // If the hero is less than 10 units from the enemy. Enemy run to hero and attack
+            if (CoordinateDifference.magnitude < 4) Attack(CoordinateDifference);
+            else
+            {
+                if (((transform.localScale.x > 0) && (transform.position.x < heroTransform.transform.position.x)) ||
+         ((transform.localScale.x < 0) && (transform.position.x > heroTransform.transform.position.x))) RunToHero(CoordinateDifference);
+                // Enemies is less than 10 units and more than 4 units from the hero. But enemy don't "see" hero.
+                else Patrolling();
+            }
+        }
+        else Patrolling();
     }
 
+    /// <summary>
+    /// Method for movements enemies in a certain direction
+    /// </summary>
+    /// <param name="direction">Direction of movement of the enemy</param>
     private void Movement(float moveSpeed, int direction)
     {
         anim.SetBool("Walking", true);
@@ -39,64 +61,48 @@ public class EnemyController : MonoBehaviour
         {
             audioSource.PlayOneShot(audioStep);
         }
-
-
         transform.position =
             transform.position + moveSpeed * new Vector3(direction, 0, 0) * Time.deltaTime;
     }
 
-    private void Patrolling()
+    private void Attack(Vector2 CoordinateDifference)
     {
-        Vector2 diffCoordinate;
-        diffCoordinate = heroTransform.position - transform.position;
+        RunToHero(CoordinateDifference);
+        meleeAtack.Attack();
+    }
 
-        if (diffCoordinate.magnitude < 4)
-        {
-            RunToHero(diffCoordinate, true);
-            meleeAtack.Attack();
-            availability = false;          
-        }
-
-        else availability = true;
-
-        // Если герой находится меньше чем на 10 единиц от противника и противник "видит" героя.
-        if ((diffCoordinate.magnitude < 10) &&
-            ((transform.localScale.x > 0) && (transform.position.x < heroTransform.transform.position.x)) ||
-            ((transform.localScale.x < 0) && (transform.position.x > heroTransform.transform.position.x))) 
-                    RunToHero(diffCoordinate, availability);  
-        
-        
-        else
-        {
+    /// <summary>
+    /// Method of patrolling enemies. 
+    /// </summary>
+    private void Patrolling()
+    {  
             anim.SetBool("Running", false);
-            //Смена стороны патрулирования
+            // Changing the side of patrol
             if (timerPatrollingSide < 0)
             {
                 direction = direction * (-1);
                 timerPatrollingSide = timePatrollingSide;
                 transform.localScale = new Vector3(direction, transform.localScale.y, transform.localScale.z);
-
             }
-            Movement(moveSpeed, direction);
-        }
+            Movement(walkSpeed, direction);
     }
 
-
-    private void RunToHero(Vector2 diffCoordinate, bool availability)
+    /// <summary>
+    /// Method tells enemies to run to hero
+    /// </summary>
+    /// <param name="coordinateDifference">Difference in coordinate between
+    /// hero and enemy</param>
+    /// <param name="availability"></param>
+    private void RunToHero(Vector2 coordinateDifference)
     {
-        if (availability)
-        {
-            //Расчёт направление бега за героем
+            // Which direction to run to the hero
             int dirRunning;
-            if (diffCoordinate.x > 0)
+            if (coordinateDifference.x > 0)
                 dirRunning = 1;
             else dirRunning = -1;
 
             transform.localScale = new Vector3(dirRunning, transform.localScale.y, transform.localScale.z);
-            Movement(moveSpeed + 5, dirRunning);
+            Movement(runSpeed, dirRunning);
             anim.SetBool("Running", true);
-        }
-
     }
-
 }
