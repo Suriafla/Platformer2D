@@ -9,51 +9,59 @@ public class HeroController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip audioLanding;
     [SerializeField] private AudioClip audioStep;
-	private bool standingOnGround;
-    private HealthController healthController;
-	private MeleeAttack meleeAttack;
-	private Rigidbody2D rb;
-	private Animator animator;
+    public float BottomOfMap { get; } = 5;
+    private bool standingOnGround;
+    private MeleeAttack meleeAttack;
+    private Rigidbody2D rb;
+    private Animator animator;
 
-	private void Start()
-	{
-		animator = GetComponent<Animator>();
-		rb = GetComponent<Rigidbody2D>();
-		meleeAttack = GetComponent<MeleeAttack>();
-        healthController = GetComponent<HealthController>();
-		standingOnGround = true;
-	}
-
-	private void FixedUpdate()
-	{
-		CheckStandingOnGround();    
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        meleeAttack = GetComponent<MeleeAttack>();
+        standingOnGround = true;
     }
 
-	void Update()
-	{
+    private void FixedUpdate()
+    {
+        CheckStandingOnGround();
+    }
 
-		if (standingOnGround)
-		{
-			animator.SetBool("isJump", false);
-		}
-		else
-		{
-			animator.SetBool("isRun", false);
-			animator.SetBool("isJump", true);
-		}
-		
-		if (Input.GetButtonDown("Fire1")) meleeAttack.Attack();
-		if (Input.GetButtonDown("Jump")) Jump();
+    void Update()
+    {
+
+        if (standingOnGround)
+        {
+            animator.SetBool("isJump", false);
+        }
+        else
+        {
+            animator.SetBool("isRun", false);
+            animator.SetBool("isJump", true);
+        }
+
+        if (Input.GetButtonDown("Fire1")) Attack();
+        if (Input.GetButtonDown("Jump")) Jump();
         if (Input.GetAxisRaw("Horizontal") != 0.0f) Running();
         else animator.SetBool("isRun", false);
 
         // The fall of the player leads to a reload of the level
-        if (transform.position.y < 5)
-		{
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		}
-		
-	}
+        if (transform.position.y < BottomOfMap)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("True");
+        }
+
+    }
+
+    /// <summary>
+    /// Method for Attack
+    /// </summary>
+    private void Attack()
+    {
+        meleeAttack.Attack();
+    }
 
     /// <summary>
     /// Method to run the character when pressing the corresponding buttons
@@ -75,7 +83,7 @@ public class HeroController : MonoBehaviour
     /// <summary>
     /// Method to jump using "AddForce" from "Rigidbody2D"
     /// </summary>
-	private void Jump()
+	public void Jump()
 	{
 		if (standingOnGround)
 		{

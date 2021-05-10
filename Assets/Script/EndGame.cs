@@ -5,8 +5,8 @@
 /// </summary>
 public class EndGame : MonoBehaviour
 {
-    private GameObject hero;
-    private GameObject lose;
+    public GameObject hero;
+    public GameObject lose;
     private GameObject win;
 
     private void Start()
@@ -39,10 +39,19 @@ public class EndGame : MonoBehaviour
     /// </summary>
     private void LoseEnd()
     {
-        if(hero.GetComponent<HealthController>().CurrentHealth <= 0)
+        if (hero.GetComponent<HealthController>().CurrentHealth <= 0)
         {
             End(null);
-            lose.SetActive(true);         
+            lose.SetActive(true);
+        }
+    }
+
+    private void WinEnd(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            End(collision);
+            win.SetActive(true);
         }
     }
 
@@ -51,10 +60,6 @@ public class EndGame : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            End(collision);
-            win.SetActive(true);
-        }
+        WinEnd(collision);
     }
 }

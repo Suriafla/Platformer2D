@@ -6,12 +6,12 @@
 public class Teleport : MonoBehaviour
 {
     [SerializeField] private AudioClip audioTeleport;
-    private Vector3 pointTeleport;
     private AudioSource audioSource;
+
+    public Vector3 PointTeleport { get; private set; } = new Vector3(158, 29, 0);
 
     private void Start()
     {
-        pointTeleport = new Vector3(158, 29, 0);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -22,7 +22,7 @@ public class Teleport : MonoBehaviour
     private void TeleportToPoint(Collider2D collision)
     {
         audioSource.PlayOneShot(audioTeleport);
-        collision.gameObject.transform.position = pointTeleport;
+        collision.gameObject.transform.position = PointTeleport;
     }
 
     /// <summary>

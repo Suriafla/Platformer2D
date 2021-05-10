@@ -9,7 +9,7 @@ public class CollectingHealth : MonoBehaviour
     /// The method restores health to the object that entered the trigger, and
     /// destroys health unit
     /// </summary>
-    void OnTriggerEnter2D(Collider2D other)
+    private void Collect(Collider2D other)
     {
         HealthController collectingHealth = other.GetComponent<HealthController>();
         if ((collectingHealth != null) && (collectingHealth.CurrentHealth < collectingHealth.MaxHealth))
@@ -17,5 +17,10 @@ public class CollectingHealth : MonoBehaviour
             collectingHealth.HealthChange(1);
             Destroy(gameObject);
         }
+    }
+   
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Collect(other);
     }
 }

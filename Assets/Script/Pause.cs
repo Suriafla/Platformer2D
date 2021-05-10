@@ -8,7 +8,7 @@ public class Pause : MonoBehaviour
     [SerializeField] private AudioClip audioPause;
     private AudioSource audioSource;
     public static GameObject PauseMenu { get; set; }
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class Pause : MonoBehaviour
     /// <summary>
     /// Class to resume the game
     /// </summary>
-    private void Resume()
+    public void Resume()
     {
         PauseMenu.SetActive(false);
         Time.timeScale = 1f;

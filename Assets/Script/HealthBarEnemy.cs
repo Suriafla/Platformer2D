@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class HealthBarEnemy : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider healthBar;
     private HealthController healthController;
 
     private void Start()
@@ -27,8 +27,8 @@ public class HealthBarEnemy : MonoBehaviour
     /// <param name="maxHealth">Maximum enemies health</param>
     public void SetMaxHealthBar(int maxHealth)
     {
-        slider.maxValue = maxHealth;
-        slider.value = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = maxHealth;
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public class HealthBarEnemy : MonoBehaviour
     /// <param name="currentHealth">Current health of enemies</param>
     public void ChangeHealthBar(int currentHealth)
     {
-        slider.value = currentHealth;
+        healthBar.value = currentHealth;
     }
 
 }

@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     private readonly float timePatrollingSide = 5;
     private AudioSource audioSource;
     private Transform heroTransform;
-    private bool availability;
     private readonly float walkSpeed = 2;
     private readonly float runSpeed = 7;
 
@@ -24,7 +23,6 @@ public class EnemyController : MonoBehaviour
         direction = 1;
         meleeAtack = GetComponent<MeleeAttack>();
         audioSource = GetComponent<AudioSource>();
-        availability = true;
     }
 
     void Update()
@@ -56,11 +54,11 @@ public class EnemyController : MonoBehaviour
     /// <param name="direction">Direction of movement of the enemy</param>
     private void Movement(float moveSpeed, int direction)
     {
-        anim.SetBool("Walking", true);
+        /*anim.SetBool("Walking", true);
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(audioStep);
-        }
+        }*/
         transform.position =
             transform.position + moveSpeed * new Vector3(direction, 0, 0) * Time.deltaTime;
     }
@@ -92,7 +90,6 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     /// <param name="coordinateDifference">Difference in coordinate between
     /// hero and enemy</param>
-    /// <param name="availability"></param>
     private void RunToHero(Vector2 coordinateDifference)
     {
             // Which direction to run to the hero

@@ -9,8 +9,7 @@ public class MovementBall : MonoBehaviour
     private Rigidbody2D rb;
     private Transform ballTransform;
     private int dirMoving = 1;
-
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ballTransform = GetComponent<Transform>();
@@ -18,7 +17,7 @@ public class MovementBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move(moveSpeed);
+        Move(dirMoving, moveSpeed);
     }
 
     private void ChangeDirection()
@@ -41,7 +40,7 @@ public class MovementBall : MonoBehaviour
     /// Method to move ball
     /// </summary>
     /// <param name="moveSpeed">move speed of ball</param>
-    private void Move(float moveSpeed)
+    public void Move(int dirMoving, float moveSpeed)
     {
         rb.AddForce(new Vector2(dirMoving * moveSpeed, 0));
     }

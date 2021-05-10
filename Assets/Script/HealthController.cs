@@ -2,7 +2,7 @@
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int maxHealth = 5;
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get => maxHealth;}
 
@@ -13,7 +13,7 @@ public class HealthController : MonoBehaviour
 
     void Update()
     {
-        DieEnemy();
+        Die();
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class HealthController : MonoBehaviour
     /// <summary>
     /// Method 
     /// </summary>
-    private void DieEnemy()
+    private void Die()
     {
         if(CurrentHealth <= 0)
         {

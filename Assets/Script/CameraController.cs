@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        FollowHero();
+        FollowToHero();
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Method indicates the camera to follow the main character
     /// </summary>
-    private void FollowHero()
+    private void FollowToHero()
     {
         heroPosition = hero.transform.position;
         heroPosition.x = hero.transform.position.x;

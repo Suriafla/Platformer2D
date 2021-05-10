@@ -11,10 +11,7 @@ public class PlatformMovements : MonoBehaviour
 
     void Update()
     {
-        if (CompareTag("Platform"))
-        {
-            MoveHorizontal(moveSpeed);
-        }
+        MoveHorizontal(moveSpeed);  
     }
 
     /// <summary>
@@ -38,7 +35,7 @@ public class PlatformMovements : MonoBehaviour
     /// Method for horizontal movement of platforms
     /// </summary>
     /// <param name="moveSpeed">Platform move speed</param>
-    private void MoveHorizontal(float moveSpeed)
+    public void MoveHorizontal(float moveSpeed)
     {
         transform.position = transform.position + dirMoving * moveSpeed * new Vector3(-1, 0, 0) * Time.deltaTime;
     }
