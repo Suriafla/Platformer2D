@@ -36,7 +36,7 @@ Ellie's Adventures is a free, open-source, 2D plaftormer game.
 The Ellie's Adventures game is open-sourced software licensed under the **Apache License 2.0**. 
  
 ## Contacts
-Elton Aslanov [peepquik@gmail.com](mailto:peepquik@gmail.com).
+Elton Aslanov [ru.elton.aslanov@gmail.com](mailto:ru.elton.aslanov@gmail.com).
 
 ## Architecture 
 ![Screenshot](uml-class.png)
