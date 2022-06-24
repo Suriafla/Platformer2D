@@ -16,7 +16,7 @@ Ellie's Adventures is a free, open-source, 2D plaftormer game.
         ```
         or
         ```
-        git config core.autocrlf false
+        $ git config core.autocrlf false
         ```
     
 3. Fork, clone remote repository to your local machine.
@@ -37,4 +37,7 @@ The Ellie's Adventures game is open-sourced software licensed under the **Apache
  
 ## Contacts
 Elton Aslanov [peepquik@gmail.com](mailto:peepquik@gmail.com).
+
+## Architecture 
+![Screenshot](uml-class.png)
 
